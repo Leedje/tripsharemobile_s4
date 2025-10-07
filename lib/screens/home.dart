@@ -7,16 +7,19 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final itineraryViewModel = context.watch<ItineraryViewModel>();
 
     return Scaffold(
       body: Column(
         children: [
           Text('Upcoming Itineraries'),
-          Container(child: ListView(children: [Card(), Card()])),
+          Expanded(
+            child: ListView(children: [Card(), Card()]),
+          ),
           SizedBox(height: 5),
           Text('Past Itineraries'),
-          Container(child: ListView()),
+          Expanded(
+            child: ListView(),
+          ),
         ],
       ),
     );

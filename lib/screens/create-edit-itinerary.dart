@@ -68,6 +68,9 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
                       }
                       return null;
                     },
+                    onChanged: (value) => {
+                      // intiterary.name = value;
+                    },
                     initialValue: '',
                     style: TextStyle(fontFamily: 'Poppins'),
                     decoration: InputDecoration(

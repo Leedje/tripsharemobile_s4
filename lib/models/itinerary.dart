@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:tripsharemobile_s4/models/day.dart';
 
 class ItineraryDTO {
@@ -7,6 +8,7 @@ class ItineraryDTO {
   String description = '';
   String country = '';
   String city = '';
+  DateTimeRange travelDates = DateTimeRange(start: DateTime.now(), end: DateTime.now());
   DateTime departure = DateTime.now();
   DateTime arrival = DateTime.now();
   List <Day> days = [];

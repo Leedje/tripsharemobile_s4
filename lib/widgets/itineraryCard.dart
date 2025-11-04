@@ -11,6 +11,7 @@ class ItineraryCard extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Card(
+      elevation: 5,
       shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(30)),
       child: Padding(
         padding: const EdgeInsets.all(8),
@@ -19,8 +20,8 @@ class ItineraryCard extends StatelessWidget {
             Container(
               margin: EdgeInsets.all(5),
               padding: EdgeInsets.all(5),
-              width: 135,
-              height: 130,
+              width: 125,
+              height: 115,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
                 image: DecorationImage(
@@ -34,7 +35,7 @@ class ItineraryCard extends StatelessWidget {
             ),
             SizedBox(width: 10),
             Container(
-              height: 150,
+              height: 130,
               width:
                   MediaQuery.of(context).size.width - 135 - 65, // width is fixed, but width should match the width of the device's screen
               child: Column(

@@ -20,111 +20,118 @@ class HomeScreen extends StatelessWidget {
     );
 
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 219, 225, 237),
       body: SafeArea(
-        child: Stack(
-          children: [
-            
-            //Background Container
-            Positioned.fill(
-              top: 160,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Color(0xFFD2DBEA),
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+        child: CustomScrollView(
+          slivers: [
+            // Top Bar + Search Bar
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CircleAvatar(),
+                        Text(
+                          'Hello, User',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                        Icon(Icons.notifications_active),
+                      ],
+                    ),
+
+                    SizedBox(height: 25),
+
+                    SearchBar(
+                      hintText: 'Search itinerary...',
+                      leading: Icon(Icons.search),
+                      elevation: WidgetStateProperty.all(0),
+                      shape: WidgetStatePropertyAll(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadiusGeometry.circular(15),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 15),
+                  ],
                 ),
               ),
             ),
 
-            CustomScrollView(
-              slivers: [
-                // Top Bar + Search Bar
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CircleAvatar(),
-                            Text(
-                              'Hello User',
-                              style: TextStyle(fontWeight: FontWeight.bold),textAlign: TextAlign.center,
-                            ),
-                            Icon(Icons.notifications_active),
-                          ],
+            //Itinerary Section
+            SliverToBoxAdapter(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 185, 198, 220),
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+                ),
+                constraints: BoxConstraints(
+                  minHeight: MediaQuery.of(context).size.height,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      //Upcoming Itineraries Header
+                      Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: Text(
+                          'Upcoming Itineraries',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+
+                      //Upcoming Itineraries List
+                      if (upcomingItineraries.isNotEmpty)
+                        ...upcomingItineraries.map((itinerary) {
+                          return GestureDetector(
+                            onTap: () {
+                              context.push('/itinerary/${itinerary.id}');
+                            },
+                            child: ItineraryCard(itinerary: itinerary),
+                          );
+                        })
+                      else
+                        Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Text('No trips coming up.'),
                         ),
 
-                        SizedBox(height: 25),
+                      SizedBox(height: 40),
 
-                        SearchBar(
-                          hintText: 'Search itinerary...',
-                        ), // MIGHT have to customize it if i want the icon
-                        SizedBox(height: 15),
-                      ],
-                    ),
-                  ),
-                ),
-
-                //Itinerary Section
-
-                //Upcoming Itineraries Header
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Text(
-                      'Upcoming Itineraries',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-
-                //Upcoming Itineraries List
-                SliverList(
-                  delegate: SliverChildBuilderDelegate((context, index) {
-                    final itinerary = upcomingItineraries.elementAt(index);
-                    return Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: GestureDetector(
-                        onTap: () {
-                          context.push('/itinerary/${itinerary.id}');
-                        },
-                        child: ItineraryCard(itinerary: itinerary,),
+                      //Past Itineraries Header
+                      Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: Text(
+                          'Past Itineraries',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
-                    );
-                  }, childCount: upcomingItineraries.length),
-                ),
 
-                SliverToBoxAdapter(child: SizedBox(height: 60,)),
-
-                //Past Itineraries Header
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Text(
-                      'Past Itineraries',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
+                      //Past Itineraries List
+                      if (pastItineraries.isNotEmpty)
+                        ...pastItineraries.map((itinerary) {
+                          return GestureDetector(
+                            onTap: () {
+                              context.push('itinerary/${itinerary.id}');
+                            },
+                            child: ItineraryCard(itinerary: itinerary),
+                          );
+                        })
+                      else
+                        Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Text("No trips have passed yet."),
+                        ),
+                    ],
                   ),
                 ),
-
-                //Past Itineraries List
-                SliverList(
-                  delegate: SliverChildBuilderDelegate((context, index) {
-                    final itinerary = pastItineraries.elementAt(index);
-                    return Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: GestureDetector(
-                        onTap: () {
-                          context.push('/itinerary/${itinerary.id}');
-                        },
-                        child: ItineraryCard(itinerary: itinerary,),
-                      ),
-                    );
-                  }, childCount: pastItineraries.length),
-                ),
-              ],
+              ),
             ),
           ],
         ),

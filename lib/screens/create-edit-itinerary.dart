@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:tripsharemobile_s4/models/itinerary.dart';
 import 'package:tripsharemobile_s4/viewModels/itineraryViewModel.dart';
 
 class CreateEditItineraryScreen extends StatefulWidget {
@@ -14,6 +15,8 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
   final _formKey = GlobalKey<FormState>();
   DateTimeRange? _selectedRange;
 
+  final itinerary = ItineraryDTO();
+
   void _showDateRangePicker(BuildContext context) async {
     final picked = await showDateRangePicker(
       context: context,
@@ -24,6 +27,8 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
     if (picked != null) {
       setState(() {
         _selectedRange = picked;
+        itinerary.travelDates = picked;
+        itinerary.numberOfDays = picked.duration.inDays;
       });
     }
   }
@@ -69,7 +74,7 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
                       return null;
                     },
                     onChanged: (value) => {
-                      // intiterary.name = value;
+                       itinerary.name = value
                     },
                     initialValue: '',
                     style: TextStyle(fontFamily: 'Poppins'),
@@ -121,6 +126,9 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.all(16),
                     ),
+                    onChanged: (value) {
+                      itinerary.description = value;
+                    },
                   ),
                 ),
 
@@ -136,6 +144,9 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.all(16),
                     ),
+                    onChanged: (value) {
+                      itinerary.country = value;
+                    },
                   ),
                 ),
 
@@ -151,6 +162,9 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.all(16),
                     ),
+                    onChanged: (value) {
+                      itinerary.city = value;
+                    },
                   ),
                 ),
 
@@ -201,7 +215,8 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
                       ),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          // itineraryViewModel.createItinerary(itinerary);
+                           itineraryViewModel.createItinerary(itinerary);
+                           context.push('/');
                         }
                       },
                       child: Text('Create'),

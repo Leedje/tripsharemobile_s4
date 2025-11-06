@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final itineraryContext = context.watch<ItineraryViewModel>();
-    final allItineraries = itineraryContext.getAllItineraries();
+    final allItineraries = itineraryContext.loadSampleItineraries();
 
     final pastItineraries = allItineraries.where(
       (itinerary) => itinerary.travelDates.end.isBefore(DateTime.now()),
@@ -47,6 +47,9 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(height: 25),
 
                     SearchBar(
+                      onChanged: (value) {
+                        itineraryContext.searchBy(value);
+                      },
                       hintText: 'Search itinerary...',
                       leading: Icon(Icons.search),
                       elevation: WidgetStateProperty.all(0),

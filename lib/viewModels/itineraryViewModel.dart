@@ -5,6 +5,7 @@ class ItineraryViewModel extends ChangeNotifier {
   final List<ItineraryDTO> _itineraries = [];
   List<ItineraryDTO> get itineraries => _itineraries;
 
+
   List<ItineraryDTO> getAllItineraries() {
     return _itineraries;
   }
@@ -94,9 +95,8 @@ class ItineraryViewModel extends ChangeNotifier {
   }
 
   List<ItineraryDTO> searchBy(String keyword) {
-    if (keyword.isEmpty) {
-      return _itineraries;
-    }
-    return _itineraries.where((i) => i.name.contains(keyword)).toList();
+   return keyword.isEmpty 
+    ? _itineraries
+    : _itineraries.where((itinerary) => itinerary.name.toLowerCase().contains(keyword.toLowerCase())).toList();
   }
 }

@@ -4,13 +4,20 @@ import 'package:provider/provider.dart';
 import 'package:tripsharemobile_s4/viewModels/itineraryViewModel.dart';
 import 'package:tripsharemobile_s4/widgets/itineraryCard.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String searchText = '';
 
   @override
   Widget build(BuildContext context) {
     final itineraryContext = context.watch<ItineraryViewModel>();
-    final allItineraries = itineraryContext.getAllItineraries();
+    final allItineraries = itineraryContext.searchBy(searchText);
 
     final pastItineraries = allItineraries.where(
       (itinerary) => itinerary.travelDates.end.isBefore(DateTime.now()),
@@ -48,7 +55,9 @@ class HomeScreen extends StatelessWidget {
 
                     SearchBar(
                       onChanged: (value) {
-                        itineraryContext.searchBy(value);
+                        setState(() {
+                          searchText = value;
+                        });
                       },
                       hintText: 'Search itinerary...',
                       leading: Icon(Icons.search),

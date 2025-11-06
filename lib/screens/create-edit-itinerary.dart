@@ -94,7 +94,7 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
                     initialValue: '',
                     style: TextStyle(fontFamily: 'Poppins'),
                     decoration: InputDecoration(
-                      hintText: 'Name',
+                      hintText: 'Itinerary Name',
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.all(16),
                     ),

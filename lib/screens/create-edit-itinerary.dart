@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'package:tripsharemobile_s4/models/itinerary.dart';
@@ -35,6 +38,20 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
 
   String _formatDate(DateTime date) {
     return DateFormat('MMM d yyyy').format(date);
+  }
+
+  XFile? _image = null;
+  final picker = ImagePicker();
+
+  selectImage() async {
+    final selectedImage = await picker.pickImage(source: ImageSource.gallery);
+
+    if (selectedImage != null) {
+      setState(() {
+        _image = selectedImage;
+        itinerary.image = _image!.path;
+      });
+    }
   }
 
   @override
@@ -73,9 +90,7 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
                       }
                       return null;
                     },
-                    onChanged: (value) => {
-                       itinerary.name = value
-                    },
+                    onChanged: (value) => {itinerary.name = value},
                     initialValue: '',
                     style: TextStyle(fontFamily: 'Poppins'),
                     decoration: InputDecoration(
@@ -171,13 +186,38 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
                 SizedBox(height: 12),
 
                 /// Cover Photo Placeholder
-                Card(
-                  shadowColor: Colors.grey,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      'Add Cover Photo',
-                      style: TextStyle(fontFamily: 'Poppins'),
+                GestureDetector(
+                  onTap: () {
+                    selectImage();
+                  },
+                  child: Card(
+                    shadowColor: Colors.grey,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(4),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: DecorationImage(
+                              image: _image == null
+                              ? NetworkImage('https://pixsector.com/cache/517d8be6/av5c8336583e291842624.png') 
+                              : FileImage(File(_image!.path)) as ImageProvider, 
+                              fit: BoxFit.fill,
+                            ),),
+                            width: 120,
+                            height: 100,
+                          ),
+                          SizedBox(width: 30,),
+                          Text(
+                            'Add Cover Photo',
+                            style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -215,8 +255,8 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
                       ),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                           itineraryViewModel.createItinerary(itinerary);
-                           context.push('/');
+                          itineraryViewModel.createItinerary(itinerary);
+                          context.push('/');
                         }
                       },
                       child: Text('Create'),

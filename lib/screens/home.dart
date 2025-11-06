@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final itineraryContext = context.watch<ItineraryViewModel>();
-    final allItineraries = itineraryContext.loadSampleItineraries();
+    final allItineraries = itineraryContext.getAllItineraries();
 
     final pastItineraries = allItineraries.where(
       (itinerary) => itinerary.travelDates.end.isBefore(DateTime.now()),

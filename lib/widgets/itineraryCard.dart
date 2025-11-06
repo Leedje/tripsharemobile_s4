@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:tripsharemobile_s4/dateFormatters/DateFormatters.dart';
 import 'package:tripsharemobile_s4/models/itinerary.dart';
@@ -27,9 +29,7 @@ class ItineraryCard extends StatelessWidget {
                 image: DecorationImage(
                   alignment: Alignment.center,
                   fit: BoxFit.fill,
-                  image: NetworkImage(
-                    'https://www.turtlefiji.com/wp-content/uploads/2024/10/pexels-julius-silver-240301-753626.jpg',
-                  ),
+                  image: FileImage(File(itinerary.image)),
                 ),
               ),
             ),

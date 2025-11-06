@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tripsharemobile_s4/layouts/mainnavlayout.dart';
 import 'package:tripsharemobile_s4/screens/create-edit-itinerary.dart';
 import 'package:tripsharemobile_s4/screens/home.dart';
+import 'package:tripsharemobile_s4/screens/view-itinerary-details.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -32,16 +33,11 @@ final appRouter = GoRouter(
     GoRoute(
       name: 'itinerary-details',
       path: '/itinerary/:id',
-      builder: (context, state) => Placeholder(),
+      builder: (context, state) {
+        final id = state.pathParameters['id'];
+        return ViewItineraryDetails();
+      },
     ),
 
-    // GoRoute(
-    //   path: '/itinerary/:id',
-    //   name: 'itineraryDetails',
-    //   builder: (context, state) {
-    //     final id = state.pathParameters['id']!;
-    //     return ItineraryDetailsScreen(id: id);
-    //   },
-    // ),
   ],
 );

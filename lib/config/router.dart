@@ -34,8 +34,8 @@ final appRouter = GoRouter(
       name: 'itinerary-details',
       path: '/itinerary/:id',
       builder: (context, state) {
-        final id = state.pathParameters['id'];
-        return ViewItineraryDetails();
+        final id = state.pathParameters['id']!;
+        return ViewItineraryDetails(id: id);
       },
     ),
 

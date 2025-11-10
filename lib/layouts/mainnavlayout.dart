@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tripsharemobile_s4/screens/create-edit-itinerary.dart';
-import 'package:tripsharemobile_s4/screens/home.dart';
 import 'package:go_router/go_router.dart';
 
 class MainNavLayout extends StatelessWidget {

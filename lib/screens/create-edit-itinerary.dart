@@ -9,6 +9,8 @@ import 'package:tripsharemobile_s4/models/itinerary.dart';
 import 'package:tripsharemobile_s4/viewModels/itineraryViewModel.dart';
 
 class CreateEditItineraryScreen extends StatefulWidget {
+  const CreateEditItineraryScreen({super.key});
+
   @override
   State<CreateEditItineraryScreen> createState() =>
       _CreateEditItineraryScreenState();

@@ -3,7 +3,7 @@ import 'package:tripsharemobile_s4/models/day.dart';
 
 class ItineraryDTO {
   String image = '';
-  String id = '';
+  String id = 'apple';
   String name = '';
   String description = '';
   String country = '';

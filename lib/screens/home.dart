@@ -130,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ...pastItineraries.map((itinerary) {
                           return GestureDetector(
                             onTap: () {
-                              context.push('itinerary/${itinerary.id}');
+                              context.push('/itinerary/${itinerary.id}');
                             },
                             child: ItineraryCard(itinerary: itinerary),
                           );

@@ -9,6 +9,6 @@ class ItineraryDTO {
   String country = '';
   String city = '';
   DateTimeRange travelDates = DateTimeRange(start: DateTime.now(), end: DateTime.now());
-  List <Day> days = [];
+  List <DayDTO> days = [];
   int numberOfDays = 0;
 }

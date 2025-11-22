@@ -13,4 +13,9 @@ class DateFormatters {
     final end = formatter.format(range.end);
     return '$start - $end';
   }
+
+  static String listedShortRange(DateTime date){
+    final formatter =  DateFormat('d/M');
+    return formatter.format(date);
+  }
 }

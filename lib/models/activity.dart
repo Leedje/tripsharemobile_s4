@@ -3,4 +3,5 @@ class ActivityDTO{
   String name = '' ;
   String description = '';
   String location = '';
+  String link = '';
 }

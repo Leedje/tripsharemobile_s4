@@ -115,8 +115,10 @@ class _ViewItineraryDetailsState extends State<ViewItineraryDetails> {
                           maxLines: 5,
                           style: TextStyle(fontWeight: FontWeight.w300),
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 15),
+                        
                         Row(children: []), // submenu pills
+                        
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -137,7 +139,7 @@ class _ViewItineraryDetailsState extends State<ViewItineraryDetails> {
                           ],
                         ),
                         ...itinerary.days.map(
-                          (day) => ActivityCard(activity: day.activities.last),
+                          (day) => ActivityCard(activity: day.activities.last, activityNumber: 1,),
                         ),
                       ],
                     ),

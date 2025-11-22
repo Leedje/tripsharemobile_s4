@@ -16,54 +16,51 @@ class ActivitiesTab extends StatelessWidget {
         final day = days[index];
         final formattedDate = DateFormatters.listedShortRange(day.date);
 
-        return Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Header with date and action button
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Day ${index + 1} – $formattedDate',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header with date and action button
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Day ${index + 1} – $formattedDate',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                FilledButton(
+                  onPressed: () {
+                    // add activity
+                  },
+                  style: FilledButton.styleFrom(
+                    backgroundColor: Color(0xFF18C0C1),
                   ),
-                  FilledButton(
-                    onPressed: () {
-                      // add activity
-                    },
-                    style: FilledButton.styleFrom(
-                      backgroundColor: Color(0xFF18C0C1),
-                    ),
-                    child: Text(
-                      'Add Activity',
-                      style: TextStyle(color: Colors.white),
-                    ),
+                  child: Text(
+                    'Add Activity',
+                    style: TextStyle(color: Colors.white),
                   ),
-                ],
-              ),
-              SizedBox(height: 20),
-
-              // Activities list
-              Expanded(
-                child: day.activities.isEmpty
-                    ? Center(
-                        child: Text(
-                          'No activities planned yet',
-                          style: TextStyle(fontWeight: FontWeight.w300),
-                        ),
-                      )
-                    : ListView.builder(
-                        itemCount: day.activities.length,
-                        itemBuilder: (context, activityIndex) {
-                          final activity = day.activities[activityIndex];
-                          return ActivityCard(activity: activity, activityNumber: activityIndex + 1,);
-                        },
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+        
+            // Activities list
+            Expanded(
+              child: day.activities.isEmpty
+                  ? Center(
+                      child: Text(
+                        'No activities planned yet',
+                        style: TextStyle(fontWeight: FontWeight.w300),
                       ),
-              ),
-            ],
-          ),
+                    )
+                  : ListView.builder(
+                      itemCount: day.activities.length,
+                      itemBuilder: (context, activityIndex) {
+                        final activity = day.activities[activityIndex];
+                        return ActivityCard(activity: activity, activityNumber: activityIndex + 1,);
+                      },
+                    ),
+            ),
+          ],
         );
       },
     );

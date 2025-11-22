@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:tripsharemobile_s4/dateFormatters/DateFormatters.dart';
+import 'package:tripsharemobile_s4/screens/activityTab.dart';
 import 'package:tripsharemobile_s4/viewModels/itineraryViewModel.dart';
 import 'package:tripsharemobile_s4/widgets/activityCard.dart';
 
@@ -14,7 +15,21 @@ class ViewItineraryDetails extends StatefulWidget {
   State<ViewItineraryDetails> createState() => _ViewItineraryDetailsState();
 }
 
-class _ViewItineraryDetailsState extends State<ViewItineraryDetails> {
+class _ViewItineraryDetailsState extends State<ViewItineraryDetails> with TickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = new TabController(length: 3, vsync: this);
+  }
+
+  @override
+  void dispose(){
+    super.dispose();
+    _tabController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final itineraryContext = context.watch<ItineraryViewModel>();
@@ -84,7 +99,7 @@ class _ViewItineraryDetailsState extends State<ViewItineraryDetails> {
                 child: Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: Color(0xFFF0F2F6),
+                    color: Color.fromARGB(255, 227, 234, 248),
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(25),
                     ),
@@ -115,37 +130,43 @@ class _ViewItineraryDetailsState extends State<ViewItineraryDetails> {
                           maxLines: 5,
                           style: TextStyle(fontWeight: FontWeight.w300),
                         ),
-                        SizedBox(height: 15),
+                        SizedBox(height: 35),
                         
-                        Row(children: []), // submenu pills
-                        
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Day 1 - 6/12',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            FilledButton(
-                              onPressed: () {},
-                              style: FilledButton.styleFrom(
-                                backgroundColor: Color(0xFF18C0C1),
-                              ),
-                              child: Text(
-                                'Add Activity',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
+                       TabBar(
+                          dividerColor: Colors.transparent,
+                          controller: _tabController,
+                          indicator: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            color: Color.fromARGB(255, 183, 195, 207),
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          indicatorSize: TabBarIndicatorSize.tab,
+                          labelColor: Colors.black,
+                          unselectedLabelColor: Colors.black,
+                          tabs: const [
+                            Tab(text: 'Planner'),
+                            Tab(text: 'Album'),
+                            Tab(text: 'Settings'),
                           ],
+                        ), // submenu pills
+
+                        Expanded(
+                          child: TabBarView(
+                            controller: _tabController,
+                            children: [
+                            ActivitiesTab(days: itinerary.days),
+                            Center(child: Text('Album')),
+                              Center(child: Text('Settings')),
+                          ]),
                         ),
-                        ...itinerary.days.map(
-                          (day) => ActivityCard(activity: day.activities.last, activityNumber: 1,),
-                        ),
+
                       ],
                     ),
                   ),
                 ),
               ),
+
+
             ],
           ),
         ),

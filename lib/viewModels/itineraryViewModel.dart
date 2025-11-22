@@ -5,6 +5,8 @@ class ItineraryViewModel extends ChangeNotifier {
   final List<ItineraryDTO> _itineraries = [];
   List<ItineraryDTO> get itineraries => _itineraries;
 
+  final ItineraryDTO _createdItinerary = ItineraryDTO();
+  ItineraryDTO get createdItinerary => _createdItinerary;
 
   List<ItineraryDTO> getAllItineraries() {
     return _itineraries;
@@ -86,7 +88,7 @@ class ItineraryViewModel extends ChangeNotifier {
 
   void createItinerary(ItineraryDTO itinerary) {
     _itineraries.add(itinerary);
-
+    //_createdItinerary = itineraryService.createItinerary(itinerary); 
     notifyListeners();
   }
 

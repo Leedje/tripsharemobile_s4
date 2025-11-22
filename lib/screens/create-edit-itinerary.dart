@@ -234,10 +234,6 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
                       onPressed: () {
                         context.go('/');
                       },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        elevation: 0,
-                      ),
                       child: Text(
                         'Cancel',
                         style: TextStyle(
@@ -248,20 +244,13 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
                     ),
                     SizedBox(width: 25),
                     FilledButton(
-                      style: FilledButton.styleFrom(
-                        backgroundColor: Color(0xFF18C0C1),
-                        textStyle: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'Poppins',
-                        ),
-                      ),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           itineraryViewModel.createItinerary(itinerary);
-                          context.push('/');
+                          context.push('/days-screen');
                         }
                       },
-                      child: Text('Create'),
+                      child: Text('Continue'),
                     ),
                   ],
                 ),

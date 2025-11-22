@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tripsharemobile_s4/layouts/mainnavlayout.dart';
 import 'package:tripsharemobile_s4/screens/create-edit-itinerary.dart';
 import 'package:tripsharemobile_s4/screens/home.dart';
+import 'package:tripsharemobile_s4/screens/view-days-screen.dart';
 import 'package:tripsharemobile_s4/screens/view-itinerary-details.dart';
 
 final appRouter = GoRouter(
@@ -39,5 +40,17 @@ final appRouter = GoRouter(
       },
     ),
 
+    GoRoute(
+      name: 'view-all-days',
+      path: '/days-screen',
+      builder: (context, state) => ViewDaysScreen(),
+    ),
+
+    GoRoute(
+      name: 'plan-activities',
+      path: '/day/:id',
+      builder: (context, state) => Placeholder(),
+    ),
+    
   ],
 );

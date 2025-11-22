@@ -16,6 +16,30 @@ class MainApp extends StatelessWidget {
       create: (itineraryViewModel) => ItineraryViewModel(),
       child: MaterialApp.router(
         routerConfig: appRouter,
+        theme: ThemeData(
+
+          fontFamily: 'Poppins',
+          // ElevatedButton default style
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+              elevation: 0,
+              textStyle: const TextStyle(
+                color: Color(0xFF18C0C1),
+                fontFamily: 'Poppins',
+              ),
+            ),
+          ),
+
+          // FilledButton default style
+          filledButtonTheme: FilledButtonThemeData(
+            style: FilledButton.styleFrom(
+              backgroundColor: const Color(0xFF18C0C1),
+              foregroundColor: Colors.white, 
+              textStyle: const TextStyle(fontFamily: 'Poppins'),
+            ),
+          ),
+        ),
       ),
     );
   }

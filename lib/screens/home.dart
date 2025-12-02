@@ -20,10 +20,10 @@ class _HomeScreenState extends State<HomeScreen> {
     final allItineraries = itineraryContext.searchBy(searchText);
 
     final pastItineraries = allItineraries.where(
-      (itinerary) => itinerary.travelDates.end.isBefore(DateTime.now()),
+      (itinerary) => itinerary.endDate.isBefore(DateTime.now()),
     );
     final upcomingItineraries = allItineraries.where(
-      (itinerary) => itinerary.travelDates.end.isAfter(DateTime.now()),
+      (itinerary) => itinerary.endDate.isAfter(DateTime.now()),
     );
 
     return Scaffold(

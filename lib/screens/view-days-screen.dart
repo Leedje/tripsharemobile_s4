@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:tripsharemobile_s4/viewModels/itineraryViewModel.dart';
 
 class ViewDaysScreen extends StatefulWidget {
+  const ViewDaysScreen({super.key});
+
   @override
   State<ViewDaysScreen> createState() => _ViewDaysScreenState();
 }

@@ -21,7 +21,7 @@ class _ViewItineraryDetailsState extends State<ViewItineraryDetails> with Ticker
   @override
   void initState() {
     super.initState();
-    _tabController = new TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
@@ -77,7 +77,7 @@ class _ViewItineraryDetailsState extends State<ViewItineraryDetails> with Ticker
                 child: Padding(
                   padding: const EdgeInsets.all(5),
                   child: Text(
-                    DateFormatters.longRange(itinerary.travelDates),
+                    DateFormatters.longRange(itinerary.startDate, itinerary.endDate),
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),

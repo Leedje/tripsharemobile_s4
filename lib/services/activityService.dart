@@ -1,0 +1,15 @@
+
+import 'package:http/http.dart' as http;
+import 'package:tripsharemobile_s4/api/apiClient.dart';
+
+import 'package:tripsharemobile_s4/models/activityDTO.dart';
+
+class ActivityService{
+
+  final ApiClient _client = ApiClient();
+
+Future<bool> addActivity(ActivityDTO activity) async{
+  return await _client.post('/activity', activity.toJson());
+}
+
+}

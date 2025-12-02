@@ -1,16 +1,15 @@
 import 'package:intl/intl.dart';
-import 'package:flutter/material.dart';
 
 class DateFormatters {
-  static String shortRange(DateTimeRange range) {
+  static String shortRange(DateTime startDate, DateTime endDate) {
     final formatter = DateFormat('d/M/yyyy');
-    return '${formatter.format(range.start)} - ${formatter.format(range.end)}';
+    return '${formatter.format(startDate)} - ${formatter.format(endDate)}';
   }
 
-  static String longRange(DateTimeRange range) {
+  static String longRange(DateTime startDate, DateTime endDate) {
     final formatter = DateFormat('MMMM d');
-    final start = formatter.format(range.start);
-    final end = formatter.format(range.end);
+    final start = formatter.format(startDate);
+    final end = formatter.format(endDate);
     return '$start - $end';
   }
 

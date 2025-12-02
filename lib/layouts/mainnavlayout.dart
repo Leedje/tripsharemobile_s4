@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 class MainNavLayout extends StatelessWidget {
   final Widget child;
 
-  const MainNavLayout({required this.child});
+  const MainNavLayout({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {

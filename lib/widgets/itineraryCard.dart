@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:tripsharemobile_s4/dateFormatters/DateFormatters.dart';
-import 'package:tripsharemobile_s4/models/itinerary.dart';
+import 'package:tripsharemobile_s4/models/itineraryDTO.dart';
 
 class ItineraryCard extends StatelessWidget {
   final ItineraryDTO itinerary;
@@ -34,10 +34,10 @@ class ItineraryCard extends StatelessWidget {
               ),
             ),
             SizedBox(width: 10),
-            Container(
+            SizedBox(
               height: 130,
               width:
-                  MediaQuery.of(context).size.width - 135 - 65, // width is fixed, but width should match the width of the device's screen
+                  MediaQuery.of(context).size.width - 135 - 65, 
               child: Column(
                 spacing: 5,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -48,7 +48,7 @@ class ItineraryCard extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    DateFormatters.longRange(itinerary.travelDates),
+                    DateFormatters.longRange(itinerary.startDate, itinerary.endDate),
                     style: TextStyle(fontWeight: FontWeight.w100),
                   ),
                   Text(

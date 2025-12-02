@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tripsharemobile_s4/models/activity.dart';
-import 'package:tripsharemobile_s4/models/day.dart';
-import 'package:tripsharemobile_s4/models/itinerary.dart';
+import 'package:tripsharemobile_s4/models/activityDTO.dart';
 
 class ActivityCard extends StatelessWidget{
 

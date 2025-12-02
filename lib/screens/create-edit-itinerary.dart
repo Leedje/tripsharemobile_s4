@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-import 'package:tripsharemobile_s4/models/itinerary.dart';
+import 'package:tripsharemobile_s4/models/itineraryDTO.dart';
 import 'package:tripsharemobile_s4/viewModels/itineraryViewModel.dart';
 
 class CreateEditItineraryScreen extends StatefulWidget {
@@ -32,7 +32,8 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
     if (picked != null) {
       setState(() {
         _selectedRange = picked;
-        itinerary.travelDates = picked;
+        itinerary.startDate = picked.start;
+        itinerary.endDate = picked.end;
         itinerary.numberOfDays = picked.duration.inDays;
       });
     }
@@ -42,10 +43,10 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
     return DateFormat('MMM d yyyy').format(date);
   }
 
-  XFile? _image = null;
+  XFile? _image;
   final picker = ImagePicker();
 
-  selectImage() async {
+  Future<void> selectImage() async {
     final selectedImage = await picker.pickImage(source: ImageSource.gallery);
 
     if (selectedImage != null) {

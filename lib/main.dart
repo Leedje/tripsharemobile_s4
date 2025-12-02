@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tripsharemobile_s4/config/router.dart';
+import 'package:tripsharemobile_s4/services/itineraryService.dart';
 import 'package:tripsharemobile_s4/viewModels/itineraryViewModel.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (itineraryViewModel) => ItineraryViewModel(),
+      create: (itineraryViewModel) => ItineraryViewModel(ItineraryService()),
       child: MaterialApp.router(
         routerConfig: appRouter,
         theme: ThemeData(

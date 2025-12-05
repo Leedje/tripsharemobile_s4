@@ -86,7 +86,7 @@ class _ViewItineraryDetailsState extends State<ViewItineraryDetails> with Ticker
           ),
         ),
 
-        // Foreground content
+        // Itinerary Details 
         Scaffold(
           backgroundColor: Colors.transparent,
           body: Stack(
@@ -148,7 +148,7 @@ class _ViewItineraryDetailsState extends State<ViewItineraryDetails> with Ticker
                             Tab(text: 'Album'),
                             Tab(text: 'Settings'),
                           ],
-                        ), // submenu pills
+                        ),
 
                         Expanded(
                           child: TabBarView(

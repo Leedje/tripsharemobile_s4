@@ -1,7 +1,5 @@
 import 'package:tripsharemobile_s4/api/apiClient.dart';
 import 'package:tripsharemobile_s4/models/itineraryDTO.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class ItineraryService {
 

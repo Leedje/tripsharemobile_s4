@@ -41,7 +41,7 @@ class _ViewDaysScreenState extends State<ViewDaysScreen> {
                 context.push('/day/${day.id}');
               },
               child: ListTile(
-                title: Text(day.name), //this needs a formatter
+                title: Text(day.name), 
               ),
             ),
             ),

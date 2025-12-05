@@ -188,7 +188,7 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
 
                 SizedBox(height: 12),
 
-                /// Cover Photo Placeholder
+                /// Cover Photo Selection
                 GestureDetector(
                   onTap: () {
                     selectImage();

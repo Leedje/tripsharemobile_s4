@@ -1,5 +1,4 @@
 
-import 'package:http/http.dart' as http;
 import 'package:tripsharemobile_s4/api/apiClient.dart';
 
 import 'package:tripsharemobile_s4/models/activityDTO.dart';

@@ -4,11 +4,13 @@ import 'package:tripsharemobile_s4/services/activityService.dart';
 
 class ActivityViewModel extends ChangeNotifier{
 
-  final ActivityService activityService = ActivityService();
+ final ActivityService activityService;
 
-  //I believe somewhere here needs to locally manage the state of the activities per day, so when a new one is added the UI updates.
+ ActivityViewModel(this.activityService);
 
-   void addActivity(ActivityDTO activity){
-    activityService.addActivity(activity);
+   Future<bool> addActivity(ActivityDTO activity) async{
+    final response = await activityService.addActivity(activity);
+    notifyListeners();
+    return response;
   }  
 }

@@ -9,6 +9,7 @@ class ActivityDTO {
   String description;
   String location;
   String link;
+  String dayId;
 
   ActivityDTO({
     this.id = '',
@@ -16,10 +17,20 @@ class ActivityDTO {
     this.description = '',
     this.location = '',
     this.link = '',
+    this.dayId = '',
   });
 
   factory ActivityDTO.fromJson(Map<String, dynamic> json) =>
       _$ActivityDTOFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ActivityDTOToJson(this);
+  @override
+  Map<String, dynamic> toJson() {
+    final map = _$ActivityDTOToJson(this);
+
+    if (map['id'] == '') {
+      map.remove('id');
+    }
+
+    return map;
+  }
 }

@@ -13,7 +13,6 @@ class ItineraryDTO {
   String image;
   DateTime startDate;
   DateTime endDate;
-  int numberOfDays;
   List<DayDTO> days;
 
   ItineraryDTO({
@@ -25,7 +24,6 @@ class ItineraryDTO {
     this.image = '',
     DateTime? startDate,
     DateTime? endDate,
-    this.numberOfDays = 0,
     List<DayDTO>? days,
   }) : startDate = startDate ?? DateTime.now(),
        endDate = endDate ?? DateTime.now(),
@@ -34,5 +32,15 @@ class ItineraryDTO {
   factory ItineraryDTO.fromJson(Map<String, dynamic> json) =>
       _$ItineraryDTOFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ItineraryDTOToJson(this);
+   @override
+  Map<String, dynamic> toJson() {
+    final map = _$ItineraryDTOToJson(this);
+
+    if (map['id'] == '') {
+      map.remove('id');
+    }
+
+    return map;
+  }
+
 }

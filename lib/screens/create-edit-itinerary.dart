@@ -34,7 +34,6 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
         _selectedRange = picked;
         itinerary.startDate = picked.start;
         itinerary.endDate = picked.end;
-        itinerary.numberOfDays = picked.duration.inDays;
       });
     }
   }
@@ -98,8 +97,6 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
                     style: TextStyle(fontFamily: 'Poppins'),
                     decoration: InputDecoration(
                       hintText: 'Itinerary Name',
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.all(16),
                     ),
                   ),
                 ),
@@ -141,8 +138,6 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
                     style: TextStyle(fontFamily: 'Poppins'),
                     decoration: InputDecoration(
                       hintText: 'Description (optional)',
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.all(16),
                     ),
                     onChanged: (value) {
                       itinerary.description = value;
@@ -159,8 +154,6 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
                     style: TextStyle(fontFamily: 'Poppins'),
                     decoration: InputDecoration(
                       hintText: 'Country',
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.all(16),
                     ),
                     onChanged: (value) {
                       itinerary.country = value;
@@ -177,8 +170,6 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
                     style: TextStyle(fontFamily: 'Poppins'),
                     decoration: InputDecoration(
                       hintText: 'City',
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.all(16),
                     ),
                     onChanged: (value) {
                       itinerary.city = value;
@@ -245,10 +236,17 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
                     ),
                     SizedBox(width: 25),
                     FilledButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          itineraryViewModel.createItinerary(itinerary);
-                          context.push('/days-screen');
+                          final createdItinerary =  await itineraryViewModel.createItinerary(itinerary);
+                          if (createdItinerary.id.isNotEmpty){
+                            itineraryViewModel.getAllItineraries();
+                            context.push('/days-screen');
+                          }
+                          else{
+                            context.go('/');
+                          }
+                          
                         }
                       },
                       child: Text('Continue'),

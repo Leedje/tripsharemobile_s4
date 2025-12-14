@@ -17,4 +17,10 @@ class DateFormatters {
     final formatter =  DateFormat('d/M');
     return formatter.format(date);
   }
+
+  static String fullDateDisplay(DateTime date){
+    final formatter = DateFormat('EEEE, d MMMM yyyy');
+    return formatter.format(date);
+  }
 }
+

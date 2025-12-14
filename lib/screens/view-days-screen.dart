@@ -13,6 +13,12 @@ class ViewDaysScreen extends StatefulWidget {
 
 class _ViewDaysScreenState extends State<ViewDaysScreen> {
   @override
+  void initState() {
+    super.initState();
+
+  }
+
+  @override
   Widget build(BuildContext context) {
     final itinerary = context.watch<ItineraryViewModel>().createdItinerary;
 
@@ -32,7 +38,7 @@ class _ViewDaysScreenState extends State<ViewDaysScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 40),
       
             /// Days List
             ...itinerary.days.map( (day) => 
@@ -49,7 +55,7 @@ class _ViewDaysScreenState extends State<ViewDaysScreen> {
             SizedBox(height: 25),
 
             FilledButton(onPressed: () {
-
+              context.go('/');
             }, child: Text('Complete'))
           ],
         ),

@@ -12,6 +12,7 @@ ActivityDTO _$ActivityDTOFromJson(Map<String, dynamic> json) => ActivityDTO(
   description: json['description'] as String? ?? '',
   location: json['location'] as String? ?? '',
   link: json['link'] as String? ?? '',
+  dayId: json['dayId'] as String? ?? '',
 );
 
 Map<String, dynamic> _$ActivityDTOToJson(ActivityDTO instance) =>
@@ -21,4 +22,5 @@ Map<String, dynamic> _$ActivityDTOToJson(ActivityDTO instance) =>
       'description': instance.description,
       'location': instance.location,
       'link': instance.link,
+      'dayId': instance.dayId,
     };

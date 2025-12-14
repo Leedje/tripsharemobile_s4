@@ -19,7 +19,6 @@ ItineraryDTO _$ItineraryDTOFromJson(Map<String, dynamic> json) => ItineraryDTO(
   endDate: json['endDate'] == null
       ? null
       : DateTime.parse(json['endDate'] as String),
-  numberOfDays: (json['numberOfDays'] as num?)?.toInt() ?? 0,
   days: (json['days'] as List<dynamic>?)
       ?.map((e) => DayDTO.fromJson(e as Map<String, dynamic>))
       .toList(),
@@ -35,6 +34,5 @@ Map<String, dynamic> _$ItineraryDTOToJson(ItineraryDTO instance) =>
       'image': instance.image,
       'startDate': instance.startDate.toIso8601String(),
       'endDate': instance.endDate.toIso8601String(),
-      'numberOfDays': instance.numberOfDays,
       'days': instance.days.map((e) => e.toJson()).toList(),
     };

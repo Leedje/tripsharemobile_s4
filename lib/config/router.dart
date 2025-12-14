@@ -1,10 +1,14 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tripsharemobile_s4/layouts/mainnavlayout.dart';
+import 'package:tripsharemobile_s4/models/dayDTO.dart';
 import 'package:tripsharemobile_s4/screens/create-edit-itinerary.dart';
 import 'package:tripsharemobile_s4/screens/home.dart';
+import 'package:tripsharemobile_s4/screens/plan-activities-screen.dart';
 import 'package:tripsharemobile_s4/screens/view-days-screen.dart';
 import 'package:tripsharemobile_s4/screens/view-itinerary-details.dart';
+import 'package:tripsharemobile_s4/viewModels/itineraryViewModel.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -49,7 +53,16 @@ final appRouter = GoRouter(
     GoRoute(
       name: 'plan-activities',
       path: '/day/:id',
-      builder: (context, state) => Placeholder(),
+      builder: (context, state) {
+        final id = state.pathParameters['id']!;
+        final itineraryVM = context.watch<ItineraryViewModel>();
+
+        final day = itineraryVM.itineraries
+            .expand(
+              (itinerary) => itinerary.days,
+            )
+            .firstWhere((day) => day.id == id, orElse: () => DayDTO(),); return PlanActivitiesScreen(day: day);
+         },
     ),
     
   ],

@@ -33,7 +33,9 @@ class _ViewItineraryDetailsState extends State<ViewItineraryDetails> with Ticker
   @override
   Widget build(BuildContext context) {
     final itineraryContext = context.watch<ItineraryViewModel>();
-    final itinerary = itineraryContext.getItineraryById(widget.id);
+    itineraryContext.getItineraryById(widget.id);
+    
+    final itinerary = itineraryContext.itineraryByID;
 
     return Stack(
       children: [
@@ -43,7 +45,7 @@ class _ViewItineraryDetailsState extends State<ViewItineraryDetails> with Ticker
           width: double.infinity,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: FileImage(File(itinerary.image)),
+              image: FileImage(File(itinerary!.image)),
               fit: BoxFit.cover,
             ),
           ),

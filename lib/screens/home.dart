@@ -17,10 +17,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final itineraryContext = context.watch<ItineraryViewModel>();
+    itineraryContext.getAllItineraries();
+    
     final allItineraries = itineraryContext.searchBy(searchText);
 
     final pastItineraries = allItineraries.where(
-      (itinerary) => itinerary.endDate.isBefore(DateTime.now()),
+      (itinerary) => itinerary.endDate.isBefore(DateTime.now()), // should be now - 1 day (so yesterday)
     );
     final upcomingItineraries = allItineraries.where(
       (itinerary) => itinerary.endDate.isAfter(DateTime.now()),

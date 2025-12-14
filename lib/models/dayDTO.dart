@@ -22,5 +22,14 @@ class DayDTO {
 
   factory DayDTO.fromJson(Map<String, dynamic> json) => _$DayDTOFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DayDTOToJson(this);
+ @override
+  Map<String, dynamic> toJson() {
+    final map = _$DayDTOToJson(this);
+
+    if (map['id'] == '') {
+      map.remove('id');
+    }
+
+    return map;
+  }
 }

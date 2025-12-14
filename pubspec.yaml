@@ -14,7 +14,8 @@ dependencies:
   image_picker: ^1.2.0
   intl: ^0.20.2
   provider: ^6.1.5
-  json_annotation: ^4.8.0
+  json_annotation: ^4.9.0
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:

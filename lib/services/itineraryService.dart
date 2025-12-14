@@ -5,7 +5,7 @@ class ItineraryService {
 
   final ApiClient _client = ApiClient();
 
-  Future<List<ItineraryDTO>?> getAllItineraries() async {
+  Future<List<ItineraryDTO>> getAllItineraries() async {
     final itineraries = await _client.get('/itinerary');
     return (itineraries as List).map(
       (itinerary) => ItineraryDTO.fromJson(itinerary)
@@ -13,7 +13,12 @@ class ItineraryService {
   }
 
   Future<ItineraryDTO?> createItinerary(ItineraryDTO itinerary) async{
-    final data = await _client.post('/itinerary', itinerary.toJson());
-    return ItineraryDTO.fromJson(data);
+    final response = await _client.post('/itinerary', itinerary.toJson());
+    return ItineraryDTO.fromJson(response);
+  }
+
+  Future<ItineraryDTO?> getItineraryById (String id) async{
+    final response = await _client.get('/itinerary/$id');
+    return ItineraryDTO.fromJson(response);
   }
 }

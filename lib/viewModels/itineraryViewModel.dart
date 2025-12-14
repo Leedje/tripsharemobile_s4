@@ -6,24 +6,35 @@ class ItineraryViewModel extends ChangeNotifier {
   final ItineraryService itineraryService;
   ItineraryViewModel(this.itineraryService);
 
-  final List<ItineraryDTO> _itineraries = [];
+  List<ItineraryDTO> _itineraries = [];
   List<ItineraryDTO> get itineraries => _itineraries;
 
   ItineraryDTO _createdItinerary = ItineraryDTO();
   ItineraryDTO get createdItinerary => _createdItinerary;
 
-  List<ItineraryDTO> getAllItineraries() {
-    return _itineraries;
-  }
+  ItineraryDTO? _itineraryByID = ItineraryDTO();
+  ItineraryDTO? get itineraryByID => _itineraryByID;
 
-  Future<void> createItinerary(ItineraryDTO itinerary) async {
-    _createdItinerary =
-        await itineraryService.createItinerary(itinerary) as ItineraryDTO;
+  Future<void> getAllItineraries() async {
+    _itineraries = await itineraryService.getAllItineraries();
     notifyListeners();
   }
 
-  ItineraryDTO getItineraryById(String id) {
-    return _itineraries.firstWhere((i) => i.id == id);
+  Future<ItineraryDTO> createItinerary(ItineraryDTO itinerary) async {
+    _createdItinerary =
+        await itineraryService.createItinerary(itinerary) as ItineraryDTO;
+    notifyListeners();
+    return _createdItinerary;
+  }
+
+  Future<void> getItineraryById(String id) async {
+    final result = await itineraryService.getItineraryById(id);
+    if (_itineraryByID != null) {
+      _itineraryByID = result;
+    } else {
+      _itineraryByID = ItineraryDTO();
+    }
+    notifyListeners();
   }
 
   List<ItineraryDTO> searchBy(String keyword) {

@@ -90,7 +90,7 @@ class _PlanActivitiesScreenState extends State<PlanActivitiesScreen> {
                 AddActivityWidget(
                   dayId: day.id,
                   onClosed: () {
-                    setState(() => addActivityFormVisible = false);
+                    setState(() => addActivityFormVisible = false); 
                   },
                   onSaved: (activity) {
                     activityVM.addActivity(activity);

@@ -29,7 +29,7 @@ class ItineraryCard extends StatelessWidget {
                 image: DecorationImage(
                   alignment: Alignment.center,
                   fit: BoxFit.fill,
-                  image: FileImage(File(itinerary.image)),
+                  image: NetworkImage(itinerary.image),
                 ),
               ),
             ),

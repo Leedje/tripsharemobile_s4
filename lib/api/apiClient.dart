@@ -21,6 +21,16 @@ class ApiClient {
     return _handleResponse(response);
   }
 
+  Future<dynamic> postMultipart(String path, http.MultipartFile file) async {
+    final uri = Uri.parse('$baseUrl$path');
+    final request = http.MultipartRequest('POST', uri)..files.add(file);
+
+    final streamedResponse = await request.send();
+    final response = await http.Response.fromStream(streamedResponse);
+
+    return _handleResponse(response);
+  }
+
   dynamic _handleResponse(http.Response response) {
     if (response.statusCode >= 200 && response.statusCode < 300) {
       final body = response.body.trim();

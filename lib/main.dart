@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tripsharemobile_s4/config/router.dart';
 import 'package:tripsharemobile_s4/services/activityService.dart';
+import 'package:tripsharemobile_s4/services/blobService.dart';
 import 'package:tripsharemobile_s4/services/itineraryService.dart';
 import 'package:tripsharemobile_s4/viewModels/activityViewModel.dart';
+import 'package:tripsharemobile_s4/viewModels/blobViewModel.dart';
 import 'package:tripsharemobile_s4/viewModels/itineraryViewModel.dart';
 // import other services/viewmodels as needed
 
@@ -22,6 +24,7 @@ class MainApp extends StatelessWidget {
           create: (itineraryContext) => ItineraryViewModel(ItineraryService()),
         ),
         ChangeNotifierProvider(create: (activityContext) => ActivityViewModel(ActivityService())),
+        ChangeNotifierProvider(create: (blobContext) => BlobViewModel(BlobService())),
       ],
       child: MaterialApp.router(
         routerConfig: appRouter,

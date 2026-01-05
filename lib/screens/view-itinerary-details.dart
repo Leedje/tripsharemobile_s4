@@ -45,7 +45,7 @@ class _ViewItineraryDetailsState extends State<ViewItineraryDetails> with Ticker
           width: double.infinity,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: FileImage(File(itinerary!.image)),
+              image: NetworkImage(itinerary!.image),
               fit: BoxFit.cover,
             ),
           ),

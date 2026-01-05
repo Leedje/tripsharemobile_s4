@@ -2,10 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'package:tripsharemobile_s4/models/itineraryDTO.dart';
+import 'package:tripsharemobile_s4/viewModels/blobViewModel.dart';
 import 'package:tripsharemobile_s4/viewModels/itineraryViewModel.dart';
 
 class CreateEditItineraryScreen extends StatefulWidget {
@@ -59,6 +61,7 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
   @override
   Widget build(BuildContext context) {
     final itineraryViewModel = context.watch<ItineraryViewModel>();
+    final blobViewModel =  context.watch<BlobViewModel>();
 
     return Scaffold(
       body: Form(
@@ -238,6 +241,14 @@ class _CreateEditItineraryScreenState extends State<CreateEditItineraryScreen> {
                     FilledButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
+                          final file = await http.MultipartFile.fromPath(
+                            'file',
+                            itinerary.image,
+                          );
+
+                          final uploadedUrl = await blobViewModel.uploadImage(file);
+                          itinerary.image = uploadedUrl;
+
                           final createdItinerary =  await itineraryViewModel.createItinerary(itinerary);
                           if (createdItinerary.id.isNotEmpty){
                             itineraryViewModel.getAllItineraries();
